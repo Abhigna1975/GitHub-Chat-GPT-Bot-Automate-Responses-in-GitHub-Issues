@@ -47,4 +47,4 @@ image
 Click on the "Connect" or "+ Add new authentication" button to authenticate your GitHub account to deploy the bot. You'll be redirected to a GitHub page where you must grant flows.network permission to install the flows-network-integration bot on an owner/repo. This repo is the one you entered into the environment variables above.
 Click on the Check button to see your flow details. As soon as the flow function's status becomes ready and the flow's status became running, the ChatGPT GitHub App goes live. Go ahead and chat with ChatGPT by creating an issue!
 
-image
+![image](https://github.com/user-attachments/assets/abd67076-e7f9-4ff3-9f39-daf90cb4da09)
