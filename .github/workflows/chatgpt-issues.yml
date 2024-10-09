@@ -1,27 +1,4 @@
-name: ChatGPT Issue Response Bot
-
-on:
-  issues:
-    types: [opened, edited]
-
-jobs:
-  respond:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run ChatGPT Bot
-      run: node bot.js
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        node-version: '20'
