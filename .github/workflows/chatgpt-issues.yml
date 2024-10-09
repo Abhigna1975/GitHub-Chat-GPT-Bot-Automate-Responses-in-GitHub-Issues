@@ -1,32 +1,27 @@
-name: ChatGPT Bot for Issues
+name: ChatGPT Issue Response Bot
 
 on:
   issues:
-    types: [opened, edited, commented]
+    types: [opened, edited]
 
 jobs:
-  chatgpt_response:
+  respond:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    - name: Process issue with ChatGPT
-      run: |
-        curl -X POST "https://api.openai.com/v1/completions" \
-        -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
-        -d '{
-          "model": "text-davinci-003",
-          "prompt": "You have an issue: ${{ github.event.issue.body }}. Provide a response.",
-          "max_tokens": 500
-        }' > response.json
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
 
-        response=$(cat response.json | jq -r '.choices[0].text')
-        echo "ChatGPT Response: $response"
+    - name: Install dependencies
+      run: npm install
 
-        curl -X POST \
-        -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-        -d '{"body": "'"$response"'"}' \
-        "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
+    - name: Run ChatGPT Bot
+      run: node bot.js
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
