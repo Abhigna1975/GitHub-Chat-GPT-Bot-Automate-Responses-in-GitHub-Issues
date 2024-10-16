@@ -10,7 +10,8 @@ jobs:
     if: github.event.label.name == 'resolved'
     steps:
       - name: Close the issue
-        uses: peter-evans/close-issue@v2
+        uses: peter-evans/close-issue@v2.6.0  # Updated to a newer version
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: 'This issue is resolved and will be closed automatically.'
+
