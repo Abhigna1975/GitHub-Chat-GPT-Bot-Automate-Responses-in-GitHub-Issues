@@ -15,4 +15,4 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           comment: 'This issue is resolved and will be closed automatically.'
 
-          .
+
