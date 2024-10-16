@@ -1,0 +1,16 @@
+name: Resolve GitHub Issues
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  close_issue:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'resolved'
+    steps:
+      - name: Close the issue
+        uses: peter-evans/close-issue@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: 'This issue is resolved and will be closed automatically.'
