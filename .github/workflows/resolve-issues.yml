@@ -4,17 +4,13 @@ on:
   issues:
     types: [labeled]
 
-permissions:
-  issues: write  # Allow writing to issues
-  contents: read  # Allow reading content
-
 jobs:
   close_issue:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'resolved'
     steps:
       - name: Close the issue
-        uses: peter-evans/close-issue@v2.6.0  # Using the latest version
+        uses: peter-evans/close-issue@v2.6.1  # Update to the latest version
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: 'This issue is resolved and will be closed automatically.'
